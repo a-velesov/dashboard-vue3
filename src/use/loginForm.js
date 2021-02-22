@@ -3,68 +3,64 @@ import * as yup from 'yup';
 import { computed, watch } from 'vue';
 import { useStore } from 'vuex';
 
-export function useLoginForm() {
-	const {
-					handleSubmit,
-					isSubmitting,
-					submitCount,
-				} = useForm();
+export default function useLoginForm() {
+  const {
+    handleSubmit,
+    isSubmitting,
+    submitCount,
+  } = useForm();
 
-	const {
-					value: email,
-					errorMessage: eError,
-					handleBlur: eBlur,
-				} = useField('email',
-		yup
-			.string()
-			.trim()
-			.required('Введите email')
-			.email('Некорректный email'),
-	);
+  const {
+    value: email,
+    errorMessage: eError,
+    handleBlur: eBlur,
+  } = useField('email',
+    yup
+      .string()
+      .trim()
+      .required('Введите email')
+      .email('Некорректный email'));
 
-	const {
-					value: password,
-					errorMessage: pError,
-					handleBlur: pBlur,
-				} = useField('password',
-		yup
-			.string()
-			.trim()
-			.required('Введите пароль')
-			.min(6, 'Пароль должен быть не менее 6 символов'),
-	);
+  const {
+    value: password,
+    errorMessage: pError,
+    handleBlur: pBlur,
+  } = useField('password',
+    yup
+      .string()
+      .trim()
+      .required('Введите пароль')
+      .min(6, 'Пароль должен быть не менее 6 символов'));
 
-	const isTooManyAttemps = computed(() => submitCount.value >= 3);
+  const isTooManyAttemps = computed(() => submitCount.value >= 3);
 
-	let title = 'Хватит жать';
+  const title = 'Хватит жать';
 
-	watch(isTooManyAttemps, value => {
+  watch(isTooManyAttemps, (value) => {
+    if (value) {
+      setTimeout(() => {
+        submitCount.value = 0;
+        // title = 'Так и быть, нажми еще';
+      }, 2500);
+    }
+  });
 
-		if(value) {
-			setTimeout(() => {
-				submitCount.value = 0;
-				// title = 'Так и быть, нажми еще';
-			}, 2500);
-		}
-	});
+  const store = useStore();
 
-	const store = useStore();
+  const onSubmit = handleSubmit(async (values) => {
+    await store.dispatch('auth/login', values);
+  });
 
-	const onSubmit = handleSubmit(async values => {
-		await store.dispatch('auth/login', values);
-	});
-
-	return {
-		email,
-		eError,
-		eBlur,
-		password,
-		pError,
-		pBlur,
-		onSubmit,
-		isSubmitting,
-		isTooManyAttemps,
-		title,
-	};
-
+  return {
+    email,
+    eError,
+    eBlur,
+    password,
+    pError,
+    pBlur,
+    onSubmit,
+    isSubmitting,
+    isTooManyAttemps,
+    title,
+  };
 }

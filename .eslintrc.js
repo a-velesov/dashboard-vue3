@@ -1,6 +1,8 @@
 module.exports = {
   root: true,
   env: {
+    browser: true,
+    es6: true,
     node: true,
   },
   extends: [
@@ -9,7 +11,11 @@ module.exports = {
   ],
   parserOptions: {
     parser: 'babel-eslint',
+    ecmaVersion: 2019,
   },
+  plugins: [
+    'vue',
+  ],
   rules: {
     'no-param-reassign': 'off',
     'class-methods-use-this': 'off',
@@ -18,15 +24,4 @@ module.exports = {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
   },
-  overrides: [
-    {
-      files: [
-        '**/__tests__/*.{j,t}s?(x)',
-        '**/tests/unit/**/*.spec.{j,t}s?(x)',
-      ],
-      env: {
-        mocha: true,
-      },
-    },
-  ],
 };
