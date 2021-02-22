@@ -1,5 +1,5 @@
 <template>
-  <component :is="layout + '-layout'" v-if="layout"/>
+	<component :is="layout + '-layout'" v-if="layout" />
 </template>
 
 <script>
@@ -9,14 +9,14 @@ import MainLayout from '@/layout/MainLayout';
 import AuthLayout from '@/layout/AuthLayout';
 
 export default {
-  setup() {
-    const route = useRoute();
+	setup() {
+		const route = useRoute();
 
-    return {
-      layout: computed(() => route.meta.layout),
-    };
-  },
-  components: { AuthLayout, MainLayout },
+		return {
+			layout: computed(() => route.meta.layout),
+		};
+	},
+	components: { AuthLayout, MainLayout },
 };
 
 </script>

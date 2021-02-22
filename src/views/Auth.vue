@@ -25,7 +25,7 @@ import { useLoginForm } from '@/use/loginForm';
 export default {
 	name: 'Auth',
 	setup() {
-		return {...useLoginForm()}
+		return { ...useLoginForm() };
 	},
 
 };
