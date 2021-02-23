@@ -19,7 +19,7 @@
         </a>
       </li>
       <li>
-        <a>
+        <a @click.prevent="logout">
           Выход
         </a>
       </li>
@@ -28,9 +28,22 @@
 </template>
 
 <script>
+import { useRouter } from 'vue-router';
+import { useStore } from 'vuex';
+
 export default {
   name: 'TheNavbar',
-  methods: {},
+  setup() {
+    const router = useRouter();
+    const store = useStore();
+
+    return {
+      logout: () => {
+        store.commit('auth/logout');
+        router.push('/auth');
+      },
+    };
+  },
 };
 </script>
 
