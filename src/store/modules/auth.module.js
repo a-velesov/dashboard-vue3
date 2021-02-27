@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 const TOKEN_KEY = 'jwt-token';
 
 export default {
@@ -18,8 +20,11 @@ export default {
     },
   },
   actions: {
-    login({ commit }) {
-      commit('setToken', 'TEST TOKEN');
+    async login({ commit }, payload) {
+      const apiKey = process.env.VUE_APP_API_KEY;
+      const url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${apiKey}`;
+      const { data } = await axios.post(url, { ...payload, returnSecureToken: true });
+      commit('setToken', data.idToken);
     },
   },
   getters: {
