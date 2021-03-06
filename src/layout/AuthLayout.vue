@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import AppMessage from '@/ui/AppMessage.vue';
+import AppMessage from '@/components/ui/AppMessage.vue';
 import { useRoute } from 'vue-router';
 import { useStore } from 'vuex';
 import error from '@/utils/error';
