@@ -9,7 +9,7 @@
     <div class="form-control" :class="{invalid: pError}">
       <label for="phone">Телефон</label>
       <input type="text" id="phone" v-model="phone" @blur="pBlur">
-      <small v-if="pErRror">{{pError}}</small>
+      <small v-if="pError">{{pError}}</small>
     </div>
 
     <div class="form-control" :class="{invalid: aError}">
@@ -34,13 +34,16 @@
 
 <script>
 
+import { useStore } from 'vuex';
 import { useRequestForm } from '../../use/requestForm';
 
 export default {
   emits: ['created'],
   setup(_, { emit }) {
+    const store = useStore();
+
     const submit = async (values) => {
-      console.log(values);
+      await store.dispatch('request/create', values);
       emit('created');
     };
 

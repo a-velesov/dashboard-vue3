@@ -2,6 +2,7 @@
   <div>
   <the-navbar />
   <div class="container with-nav">
+    <app-message />
     <router-view />
   </div>
   </div>
@@ -9,10 +10,11 @@
 
 <script>
 import TheNavbar from '@/components/TheNavbar.vue';
+import AppMessage from '@/components/ui/AppMessage.vue';
 
 export default {
   name: 'MainLayout',
-  components: { TheNavbar },
+  components: { AppMessage, TheNavbar },
   methods: {},
 };
 </script>
