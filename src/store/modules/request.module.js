@@ -1,5 +1,4 @@
 import axios from '@/axios/request';
-// eslint-disable-next-line import/no-cycle
 import store from '@/store';
 
 export default {
@@ -15,7 +14,7 @@ export default {
     },
   },
   mutations: {
-    setRequest(state, requests) {
+    setRequests(state, requests) {
       state.requests = requests;
     },
     addRequest(state, request) {
@@ -38,6 +37,21 @@ export default {
           value: 'Заявка создана',
           type: 'primary',
         }, { root: true });
+      } catch (e) {
+        dispatch('setMessage', {
+          value: e.message,
+          type: 'danger',
+        }, { root: true });
+      }
+    },
+    async load({ commit, dispatch }) {
+      try {
+        const token = store.getters['auth/token'];
+        const { data } = await axios.get(`/requests.json?auth=${token}`);
+        const requests = Object.keys(data).map((id) => ({
+          ...data[id], id,
+        }));
+        commit('setRequests', requests);
       } catch (e) {
         dispatch('setMessage', {
           value: e.message,
