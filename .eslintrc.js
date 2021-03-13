@@ -17,6 +17,7 @@ module.exports = {
     'vue',
   ],
   rules: {
+    'import/no-cycle': 'off',
     'no-param-reassign': 'off',
     'class-methods-use-this': 'off',
     'linebreak-style': 0,

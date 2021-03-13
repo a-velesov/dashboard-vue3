@@ -1,5 +1,4 @@
 import axios from 'axios';
-// eslint-disable-next-line import/no-cycle
 import router from '@/router';
 
 const requestAxios = axios.create({
