@@ -4,7 +4,6 @@
       {{ title }}
       <slot name="header" />
     </h2>
-
     <slot />
   </div>
 </template>
@@ -26,5 +25,8 @@ export default {
 </script>
 
 <style scoped>
-
+.card-title {
+  margin: 0;
+  border: none;
+}
 </style>

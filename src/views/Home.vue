@@ -2,14 +2,13 @@
   <app-loader v-if="loading" />
   <app-page title="Список заявок" v-else>
     <template #header>
-      <button
-        class="btn primary"
+      <span
+        class="create"
         @click="modal = true"
-      >Создать</button>
+      >+</span>
     </template>
 
-    <request-table :requests="requests">
-    </request-table>
+    <request-table :requests="requests" />
 
     <teleport to="body">
       <app-modal v-if="modal" title="Создать заявку" @close="modal = false">
@@ -58,3 +57,9 @@ export default {
   },
 };
 </script>
+<style scoped>
+.create {
+  color: #42b983;
+  cursor: pointer;
+}
+</style>
