@@ -1,9 +1,9 @@
 <template>
   <div class="card">
-    <h2 class="card-title">
-      {{ title }}
-      <slot name="header" />
-    </h2>
+    <div class="card-title">
+      <h2>{{ title }}</h2>
+      <slot name="additional" />
+    </div>
     <slot />
   </div>
 </template>
@@ -25,8 +25,15 @@ export default {
 </script>
 
 <style scoped>
-.card-title {
-  margin: 0;
-  border: none;
+h2 {
+  padding: 0;
+  margin: 20px 0;
 }
+
+.card-title {
+  border: none;
+  justify-content: flex-start;
+  align-items: baseline;
+}
+
 </style>
