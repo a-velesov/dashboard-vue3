@@ -1,4 +1,9 @@
 <template>
+  <div v-if="back" class="back">
+    <router-link class="text-white" to="/">
+      Вернуться к заявкам
+    </router-link>
+  </div>
   <div class="card">
     <div class="card-title">
       <h2>{{ title }}</h2>
@@ -17,6 +22,10 @@ export default {
       default: '',
       required: true,
     },
+    back: {
+      type: Boolean,
+      default: false,
+    },
   },
   setup(props) {
     document.title = `${props.title} | Blinkoff`;
@@ -34,6 +43,10 @@ h2 {
   border: none;
   justify-content: flex-start;
   align-items: baseline;
+}
+
+.back {
+  padding-bottom: 10px;
 }
 
 </style>

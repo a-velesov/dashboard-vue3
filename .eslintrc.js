@@ -20,6 +20,7 @@ module.exports = {
     'import/no-cycle': 'off',
     'no-param-reassign': 'off',
     'class-methods-use-this': 'off',
+    'vue/no-multiple-template-root': 'off', // vue 3 added multiroot
     'linebreak-style': 0,
     'max-len': 'off',
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
