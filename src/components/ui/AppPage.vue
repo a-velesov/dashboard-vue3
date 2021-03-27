@@ -1,7 +1,7 @@
 <template>
   <div v-if="back" class="back">
     <router-link class="text-white" to="/">
-      Вернуться к заявкам
+      >> Вернуться к заявкам
     </router-link>
   </div>
   <div class="card">
@@ -47,6 +47,7 @@ h2 {
 
 .back {
   padding-bottom: 10px;
+  padding-left: 10px;
 }
 
 </style>
