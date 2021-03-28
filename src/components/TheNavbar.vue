@@ -13,11 +13,11 @@
           Помощь
         </router-link>
       </li>
-      <li>
+<!--      <li>
         <a @click.prevent="openSidebar">
           Сообщения
         </a>
-      </li>
+      </li>-->
       <li>
         <a @click.prevent="logout">
           Выход

@@ -1,12 +1,14 @@
 <template>
   <app-loader v-if="loading" />
   <app-page back title="Заявка" v-else-if="request">
-    <p><strong>Имя владельца</strong>: {{request.fio}}</p>
-    <p><strong>Телефон</strong>: {{request.phone}}</p>
-    <p><strong>Сумма</strong>: {{currency(request.amount)}}</p>
-    <p><strong>Статус</strong>: <app-status :type="request.status" /></p>
-    <div class="form-control">
-      <label for="status">Статус</label>
+    <div class="requestion-field"><strong>Имя владельца</strong>: {{request.fio}}</div>
+    <div class="requestion-field"><strong>Телефон</strong>: {{request.phone}}</div>
+    <div class="requestion-field"><strong>Сумма</strong>: {{currency(request.amount)}}</div>
+    <div class="requestion-field"><strong>Статус</strong>:
+      <app-status :type="request.status" />
+      <img class="edit-status" @click="updateStatus = true" src="../assets/pen.svg" alt="edit status">
+    </div>
+    <div v-if="updateStatus" class="form-control">
       <select id="status" v-model="status">
         <option value="done">Завершен</option>
         <option value="cancelled">Отменен</option>
@@ -36,6 +38,7 @@ export default {
     const loading = ref(true);
     const request = ref({});
     const status = ref();
+    const updateStatus = ref(false);
     const store = useStore();
     const route = useRoute();
     const router = useRouter();
@@ -58,6 +61,7 @@ export default {
       const data = { ...request.value, id: route.params.id, status: status.value };
       await store.dispatch('request/update', data);
       request.value.status = status.value;
+      updateStatus.value = false;
     };
 
     return {
@@ -67,6 +71,7 @@ export default {
       remove,
       update,
       status,
+      updateStatus,
       hasChanges,
     };
   },
@@ -74,5 +79,10 @@ export default {
 </script>
 
 <style scoped>
+.requestion-field {
+  display: flex;
+  align-items: center;
+  margin: 15px 0;
+}
 
 </style>
