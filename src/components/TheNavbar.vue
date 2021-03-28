@@ -14,7 +14,7 @@
         </router-link>
       </li>
       <li>
-        <a>
+        <a @click.prevent="openSidebar">
           Сообщения
         </a>
       </li>
@@ -42,6 +42,7 @@ export default {
         store.commit('auth/logout');
         router.push('/auth');
       },
+      openSidebar: () => store.commit('openSidebar'),
     };
   },
 };
