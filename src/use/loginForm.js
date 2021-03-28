@@ -1,6 +1,6 @@
 import { useField, useForm } from 'vee-validate';
 import * as yup from 'yup';
-import { computed, watch } from 'vue';
+import { computed, watch, onMounted } from 'vue';
 import { useStore } from 'vuex';
 import router from '@/router';
 
@@ -36,6 +36,11 @@ export default function useLoginForm() {
   const isTooManyAttemps = computed(() => submitCount.value >= 3);
 
   const title = 'Хватит жать';
+
+  onMounted(() => {
+    email.value = 'admin@gmail.com';
+    password.value = '123456';
+  });
 
   watch(isTooManyAttemps, (value) => {
     if (value) {
